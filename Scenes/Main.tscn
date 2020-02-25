@@ -17,7 +17,7 @@ shader = ExtResource( 5 )
 shader_param/radius = 5.0
 shader_param/amount = 0.25
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=4]
 radius = 18.9068
 
 [node name="Main" type="Node2D"]
@@ -123,7 +123,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 position = Vector2( -0.245056, 0.264374 )
-shape = SubResource( 7 )
+shape = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 pause_mode = 2

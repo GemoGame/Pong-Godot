@@ -4,7 +4,7 @@ var direction = Vector2()
 
 func _ready():
 	randomize()
-	# start with random direction beetween -1 and 1
+	#inisiasi arah awal bola
 	_initiate_direction()
 	get_tree().paused = true
 		
@@ -17,10 +17,10 @@ func _process(delta):
 		direction.x *= 2
 	var velocity = (speed * direction) * 100
 	var collision = move_and_collide(velocity * delta)
-	if collision != null:
+	#mengecek apakah terjadi pantulan dengan objek lain
+		#jika ya bola akan memantul berdasarkan arah datang bola dan nilai normal dari koordinat pantulan bola
+	if collision != null: 
 		direction = direction.bounce(collision.normal) # do ball bounce
 
 func _on_Timer_timeout():
 	get_tree().paused = false
-	$FireParticles.emitting = true
-	pass # Replace with function body.
