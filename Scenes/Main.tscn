@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Ball.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/PlatformController.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Ball.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/glow.shader" type="Shader" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 59.2273 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 428.866, 10 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+shader_param/radius = 5.0
+shader_param/amount = 0.25
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 18.9068
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 1.85065
+margin_right = 1025.85
+margin_bottom = 600.0
+color = Color( 0.0823529, 0.0784314, 0.0784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftPlatform" type="KinematicBody2D" parent="."]
+position = Vector2( 124, 300 )
+collision_layer = 1025
+
+[node name="ColorRect" type="ColorRect" parent="LeftPlatform"]
+margin_right = 20.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPlatform"]
+position = Vector2( 10.7225, 59.7093 )
+shape = SubResource( 1 )
+
+[node name="RightPlatform" type="KinematicBody2D" parent="."]
+position = Vector2( 900, 300 )
+collision_layer = 1025
+
+[node name="ColorRect" type="ColorRect" parent="RightPlatform"]
+margin_right = 20.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPlatform"]
+position = Vector2( 10.7225, 59.7093 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 124, 0 )
+collision_layer = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 124, 600 )
+collision_layer = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 900, 0 )
+collision_layer = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2( 900, 600 )
+collision_layer = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="RightBase" type="Area2D" parent="."]
+position = Vector2( 1024, 300 )
+rotation = 1.5708
+
+[node name="RightCollider" type="CollisionShape2D" parent="RightBase"]
+shape = SubResource( 2 )
+
+[node name="LeftBase" type="Area2D" parent="."]
+position = Vector2( 0, 300 )
+rotation = 1.5708
+
+[node name="LeftCollider" type="CollisionShape2D" parent="LeftBase"]
+shape = SubResource( 2 )
+
+[node name="Ball" type="KinematicBody2D" parent="."]
+material = SubResource( 3 )
+position = Vector2( 512, 300 )
+script = ExtResource( 3 )
+speed = 15
+
+[node name="TextureRect" type="TextureRect" parent="Ball"]
+margin_left = -19.2451
+margin_top = -17.7357
+margin_right = 73.7549
+margin_bottom = 75.2643
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2( -0.245056, 0.264374 )
+shape = SubResource( 7 )
+
+[node name="Timer" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Control" parent="." instance=ExtResource( 4 )]
+[connection signal="body_entered" from="RightBase" to="." method="_on_RightBase_body_entered"]
+[connection signal="body_entered" from="LeftBase" to="." method="_on_LeftBase_body_entered"]
+[connection signal="timeout" from="Timer" to="Ball" method="_on_Timer_timeout"]
