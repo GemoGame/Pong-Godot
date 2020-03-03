@@ -32,7 +32,6 @@ func _process(delta):
 			
 	_move_platform(delta)
 
-
 func _move_platform(delta):
 	#platform akan bergerak ke atas
 	if current_input == "up":
@@ -49,11 +48,9 @@ func _move_platform(delta):
 	elif current_input == "":
 		_move_both_platform(Vector2(0,0), delta)
 	
-
 func _move_both_platform(vel,delta):
 	left_platform.move_and_collide(vel *delta, false)
 	right_platform.move_and_collide(vel *delta, false)
-
 
 #mengecek ketika ada objek yang masuk ke daerah belakang platform kanan
 func _on_RightBase_body_entered(body):
@@ -61,7 +58,7 @@ func _on_RightBase_body_entered(body):
 		body.position.x = 1024/2
 		body.position.y = 600/2
 		score.left += 1
-		$Control._set_score_text(score.left,score.right)
+		$UI._set_score_text(score.left,score.right)
 		$Ball._initiate_direction()
 		_check_score()
 
@@ -71,15 +68,15 @@ func _on_LeftBase_body_entered(body):
 		body.position.x = 1024/2
 		body.position.y = 600/2
 		score.right += 1
-		$Control._set_score_text(score.left,score.right)
+		$UI._set_score_text(score.left,score.right)
 		$Ball._initiate_direction()
 		_check_score()
 
 func _check_score():
 	if score.left >= score_to_win:
-		$Control._set_win_text("Left Wins!")
+		$UI._set_win_text("Left Wins!")
 		get_tree().paused = true # menghentikan permainan
 		
 	elif score.right >= score_to_win:
-		$Control._set_win_text("Right Wins!")
+		$UI._set_win_text("Right Wins!")
 		get_tree().paused = true # menghentikan permainan

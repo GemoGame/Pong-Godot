@@ -22,10 +22,10 @@ radius = 18.9068
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+score_to_win = 999
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 1.85065
-margin_right = 1025.85
+margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 0.0823529, 0.0784314, 0.0784314, 1 )
 __meta__ = {
@@ -131,7 +131,8 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="Control" parent="." instance=ExtResource( 4 )]
+[node name="UI" parent="." instance=ExtResource( 4 )]
+visible = false
 [connection signal="body_entered" from="RightBase" to="." method="_on_RightBase_body_entered"]
 [connection signal="body_entered" from="LeftBase" to="." method="_on_LeftBase_body_entered"]
 [connection signal="timeout" from="Timer" to="Ball" method="_on_Timer_timeout"]

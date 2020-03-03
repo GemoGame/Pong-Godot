@@ -18,7 +18,7 @@ func _process(delta):
 	var velocity = (speed * direction) * 100
 	var collision = move_and_collide(velocity * delta)
 	#mengecek apakah terjadi pantulan dengan objek lain
-		#jika ya bola akan memantul berdasarkan arah datang bola dan nilai normal dari koordinat pantulan bola
+	#jika ya bola akan memantul berdasarkan arah datang bola dan nilai normal dari koordinat pantulan bola
 	if collision != null: 
 		direction = direction.bounce(collision.normal) # do ball bounce
 
